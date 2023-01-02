@@ -1,193 +1,117 @@
 html {
     box-sizing: border-box;
 }
-*,*::before,*::after {
+*, *::after, *::before {
     box-sizing: border-box;
 }
-
 body {
-    padding: 0;
-    margin: 0;
-    height: 100vh;
-    font: 1em sans-serif;
-    background-color: #d3d7dc;
-    display: flex;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
+    font-family: sans-serif;
+    background-color: whitesmoke;
 }
-
-
-/* Style List of todos */
-.todo-container {
-    width: 40rem;
-    min-height: 600px;
-    padding: 40px;
-    background-color: #ffffff;
-    border-radius: 20px;
-    border: 1px solid #d7d9dd;
-    box-shadow: 1px 1px 20px 8px rgb(185 183 183 / 70%);
-}
-
-.todo-container h2,
-.todo-container p {
-    text-align: center;
-    color: #474749;
-}
-
-.todo-container .wrapper-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-/* Style for wrapper add todo */
-.wrapper-add {
-    line-height: 22px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-}
-.wrapper-add .add-btn {
-    font-size: 22px;
-    color: #979da2;
-    border: none;
-    background-color: transparent;
-    margin-right: 5px;
-}
-.wrapper-add .add-btn:hover {
-    cursor: pointer;
-}
-.wrapper-add input {
-    font-size: 22px;
-    border: none;
-    width: 100%;
-}
-
-
-
-/* Custom checkbox */
-.todo-wrapper {
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    color: #474749;
-}
-
-
-.todo-wrapper .todo-checkbox {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: rgba(238, 240, 242, 0.7);
-    border-radius: 5px;
-}
-
-.todo-wrapper:hover .todo-checkbox ~ .checkmark {
-    background-color: rgba(238, 240, 242, 1);
-}
-
-.todo-wrapper .todo-checkbox:checked ~ .checkmark {
-    background-color: #1b1a1d;
-}
-
-.checkmark:after {
-    content: "";
-    position: absolute;
+.display-none {
     display: none;
 }
-
-.todo-wrapper .todo-checkbox:checked ~ .checkmark:after {
-    display: block;
-}
-
-.todo-wrapper .checkmark:after {
-    left: 10px;
-    top: 6px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-
-.todo-wrapper .todo-checkbox:checked ~ .todo-text {
+.checked {
     text-decoration: line-through;
 }
 
-.flex-left {
-    flex-basis: 90%;
+.wrapper-todo-app {
+    text-align: center;
+    background-color: #fff;
+    width: 35vw;
+    margin: 50px auto;
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid #cacaca;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.176);
 }
-.flex-right {
-    flex-basis: 10%;
-    opacity: 0;
+.wrapper-todo-app h1 {
+    border-bottom: 1px solid #cacaca;
+    padding-bottom: 10px;
 }
 
-/* Style Delete & Edit buttons */
-.todo-wrapper button {
+.wrapper-todo-app .wrapper-insert {
+    display: flex;
+    justify-content: space-between;
+}
+.wrapper-todo-app .wrapper-insert .add-task-btn {
+    flex-basis: 20%;
+    line-height: 30px;
+    font-size: 18px;
+    background-color: #000;
+    color: whitesmoke;
+    border: 1px solid #cacaca;
+    border-radius: 5px;
+    transition: all 0.1s ease-in-out 0s;
+}
+.wrapper-todo-app .wrapper-insert .add-task-btn:hover {
+    cursor: pointer;
     background-color: transparent;
-    border: none;
-    font-size: 25px;
+    color: #000;
+    border: 1px solid #000;
+}
+
+.wrapper-todo-app .wrapper-insert .input-text-task {
+    padding: 0 10px;
+    flex-basis: 78%;
+    line-height: 30px;
+    font-size: 20px;
+    border: 1px solid #cacaca;
+    border-radius: 5px;
+}
+
+.wrapper-todo-app .wrapper-list-taks {
     padding: 0;
     margin: 0;
+    margin-top: 20px;
 }
-.todo-wrapper button:hover {
+
+.wrapper-todo-app .wrapper-list-taks li {
+    list-style: none;
+    text-align: left;
+    border-radius: 5px;
+    line-height: 30px;
+    display: flex;
+    justify-content: space-around;
+    padding: 5px 10px;
+    background-color: #efefef6f;
+    margin-bottom: 5px;
+}
+
+.wrapper-todo-app .wrapper-list-taks li:nth-child(odd) {
+    background-color: #cacaca6f;
+}
+
+.wrapper-todo-app .wrapper-list-taks li label {
+    transition: all 0.1s ease-in-out 0s;
+    line-height: 40px;
+    flex-basis: 75%;
+    font-size: 18px;
+}
+.wrapper-todo-app .wrapper-list-taks li label:hover {
+    color: #6e6e6e;
     cursor: pointer;
 }
-.todo-wrapper .delete-todo {
-    color: #ff0000;
-    transform: translate(-50%, -30%);
-}
-.todo-wrapper .edit-todo {
-    transform: translate(0, -20%);
+
+.wrapper-todo-app .wrapper-list-taks li .edit-btn,
+.wrapper-todo-app .wrapper-list-taks li .delete-btn {
+    flex-basis: 10%;
+    opacity: 0;
+    transition: all 0.2s ease-in-out 0s;
+    align-self: center;
+    line-height: 20px;
 }
 
-.todo-wrapper .todo-edit {
-    padding: 0;
-    box-shadow: inset 0 0 14px -11px #302f2fc4;
-    font-size: 22px;
-    border: none;
-    width: 90%;
-    outline: 2px solid #000;
-}
-
-.todo-container .wrapper-list li:hover .flex-right{
+.wrapper-todo-app .wrapper-list-taks li:hover .edit-btn,
+.wrapper-todo-app .wrapper-list-taks li:hover .delete-btn {
     opacity: 1;
 }
 
-.wrapper-description {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.wrapper-description .clear-all {
+.wrapper-todo-app .wrapper-list-taks li input[type=text] {
+    line-height: 38px;
+    display: block;
+    width: 100%;
     background-color: transparent;
-    padding: 0 5px;
-    line-height: 20px;
-    font-size: 15px;
-    height: 30px;
-}
-.wrapper-description .clear-all:hover {
-    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
 }
