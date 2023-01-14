@@ -8,13 +8,16 @@ class Task {
 
 class TodoList {
     
-    constructor(elementInitApp, preset = {}) {
-        this.titleOfApp = preset.title || 'Todo List App';
-        this.idOfApp = preset.id || '';
-        this.elementInitApp = elementInitApp;
-        this.state = [];
-        this.arrayOfLiElementsToaster = [];
-        this.isAlertBoxActive = true;
+    constructor(elementInitApp, preset) {
+        let defaultValues = {
+            titleOfApp: 'Todo List App',
+            idOfApp: '',
+            elementInitApp,
+            state: [],
+            arrayOfLiElementsToaster: [],
+            isAlertBoxActive: true
+        };
+        Object.assign(this, defaultValues, preset);
         this.createStructureApp();
         this.checkDataForState();
     }
@@ -64,32 +67,36 @@ class TodoList {
         // function of event
         function handlerAddTaskBtn(event) {
             let value = '';
-            if(this.tagName == 'INPUT') {
+            let checkEnterKey = event.key === 'Enter';
+            let checkTagNameButton = event.currentTarget.tagName === 'BUTTON';
+            if(checkEnterKey) {
                 value = this.value.trim();
-            } else if(this.tagName == 'BUTTON') {
-                value = this.closest('section').querySelector('.input-text-task').value.trim();     
+            } else if(checkTagNameButton) {
+                value = this.closest('section').querySelector('.input-text-task').value.trim();
             }
             
-            if(value.length > 0 ) {
-                const uniqueIdTask = mainContext.genarateUID(6);
-                const newTask = new Task(value, uniqueIdTask);
-                mainContext.state = [
-                    ...mainContext.state,
-                    newTask
-                ];
-                event.target.value = '';
-                mainContext.renderTodoTasks();
-            } else {
-                if(mainContext.isAlertBoxActive) {
-                    mainContext.isAlertBoxActive = false;
-                    mainContext.runToaster('You should enter something for add task!');
+            if(checkTagNameButton || checkEnterKey) {
+                if(value.length > 0 ) {
+                    const uniqueIdTask = mainContext.genarateUID(6);
+                    const newTask = new Task(value, uniqueIdTask);
+                    mainContext.state = [
+                        ...mainContext.state,
+                        newTask
+                    ];
+                    event.target.value = '';
+                    mainContext.renderTodoTasks();
+                } else {
+                    if(mainContext.isAlertBoxActive) {
+                        mainContext.isAlertBoxActive = false;
+                        mainContext.runToaster('You should enter something for add task!');
+                    }
                 }
-            }
+            }           
         };
 
         // Add EventListeners
         addTaskBtn.addEventListener('click', handlerAddTaskBtn);
-        inputElement.addEventListener('change', handlerAddTaskBtn);
+        inputElement.addEventListener('keypress', handlerAddTaskBtn);
 
         this.elementInitApp.append(wrapperElementApp);
     }
@@ -300,8 +307,8 @@ class TodoList {
 }
 
 const preset1 = {
-    title: 'Todo list app one',
-    id: 'todoList1'
+    titleOfApp: 'Todo list app one',
+    idOfApp: 'todoList1'
 };
 
 const myapp1 = document.getElementById('myapp1');
