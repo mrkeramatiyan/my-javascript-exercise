@@ -37,7 +37,7 @@ body {
 .wrapper-todo-app .wrapper-insert .add-task-btn {
     flex-basis: 20%;
     line-height: 30px;
-    font-size: 18px;
+    font-size: 16px;
     background-color: #000;
     color: whitesmoke;
     border: 1px solid #cacaca;
